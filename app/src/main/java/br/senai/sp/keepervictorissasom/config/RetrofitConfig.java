@@ -29,6 +29,16 @@ public class RetrofitConfig {
 
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(AppUtils.baseURL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    public RetrofitConfig() {
+
+
+        this.retrofit = new Retrofit.Builder()
+                .baseUrl(AppUtils.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

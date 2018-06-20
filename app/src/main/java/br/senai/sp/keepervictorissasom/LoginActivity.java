@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Usuario usuario = new Usuario (campoEmail.getEditableText().toString(), campoSenha.getEditableText().toString());
 
-                Call<ResponseBody> chamadaLogin = new RetrofitConfig(token).getRestInterface().realizarLogin(usuario);
+                Call<ResponseBody> chamadaLogin = new RetrofitConfig().getRestInterface().realizarLogin(usuario);
                 chamadaLogin.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -59,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                 JSONObject jsonObject = new JSONObject(response.body().string());
                                 String token = jsonObject.getString("token");
+
+                                Log.e("meutoken",String.valueOf(token));
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("token", "Bearer " + token);
                                 editor.apply();
